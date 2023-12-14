@@ -9,8 +9,8 @@ const server = http.createServer(app)
 const socket = new Server(server)
 
 
-app.use(cors({origin: '*'}))
-
+app.use(cors())
+app.options('*', cors())
 
 
 socket.on('connection', (connection) => {
