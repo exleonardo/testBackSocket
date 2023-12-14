@@ -1,6 +1,7 @@
 import express,{Request,Response} from 'express'
 import http from 'http'
 import { Server } from 'socket.io';
+import cors from 'cors'
 
 const app = express()
 const port =process.env.PORT|| 3000
@@ -8,7 +9,7 @@ const server = http.createServer(app)
 const socket = new Server(server)
 
 
-
+app.use(cors({origin: '*'}))
 
 
 
