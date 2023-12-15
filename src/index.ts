@@ -9,7 +9,8 @@ const server = http.createServer(app)
 const socket = new Server(server,{cors: {
         origin: "https://chatwebsocket-front.vercel.app",
         methods: ["GET", "POST"],
-        credentials: true
+        credentials: true,
+        preflightContinue:true
     }})
 
 
