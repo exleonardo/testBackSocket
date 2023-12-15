@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
-    "dev": "nodemon --inspect dist/index.ts"
+    "dev": "nodemon --inspect dist/index.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",

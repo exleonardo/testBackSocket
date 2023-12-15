@@ -4,9 +4,12 @@ import { Server } from 'socket.io';
 import cors from 'cors'
 
 const app = express()
-const port =process.env.PORT|| 3000
+const port =process.env.PORT|| 5000
 const server = http.createServer(app)
-const socket = new Server(server)
+const socket = new Server(server,{cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    }})
 
 
 app.use(cors())
@@ -14,7 +17,25 @@ app.options('*', cors())
 
 
 socket.on('connection', (connection) => {
-    console.log('a user connected');
+    connection.on("connect", () => {
+        console.log("a user connected");
+        console.log(connection.connected); // true
+    });
+
+    connection.on("connect_error", () => {
+        console.log("user connect_error");
+    });
+
+    connection.on("disconnect", () => {
+        console.log(connection.connected); // false
+        console.log("user disconnected");
+    });
+
+    connection.on("client-message-sent", (msg) => {
+        console.log("message: " + msg);
+        // socket.emit("chat message", msg);
+    });
+    console.log('a user connected',connection.id);
 });
 
 
@@ -22,7 +43,10 @@ socket.on('connection', (connection) => {
 const todo = [{id:1,title:'HTML',isDone:false},{id:2,title:'React',isDone:false},{id:3,title:'CSS',isDone:false},{id:4,title:'JS',isDone:false}]
 const address = [{value:'Novaya Borovaya'},{value:"Prospect pushkina",}]
 
+socket.on('connection', (connection) => {
 
+    console.log('a user connected',connection.id);
+});
 
 
 
@@ -31,6 +55,7 @@ app.get('/', (req:Request, res:Response) => {
 
     res.send('Hello')
 })
+
 app.get('/prod', (req:Request, res:Response) => {
     if(req.query.title){
         const title =req.query.title.toString()
@@ -68,7 +93,6 @@ app.get('/address', (req:Request, res:Response) => {
     res.send(address)
 })
 
-
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
