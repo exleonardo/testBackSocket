@@ -7,10 +7,12 @@ const app = express()
 const port =process.env.PORT|| 5000
 const server = http.createServer(app)
 const socket = new Server(server,{cors: {
-        origin: "http://localhost:3000",
+        origin: "https://chatwebsocket-front.vercel.app/",
         methods: ["GET", "POST"]
     }})
 
+
+const messages =[{message:'Hello Bomj',id:1, user:{id:1,name:'Dimych'}},{message:'Hello Psina',id:1, user:{id:1,name:'Victor'}}]
 
 app.use(cors())
 app.options('*', cors())
@@ -32,9 +34,14 @@ socket.on('connection', (connection) => {
     });
 
     connection.on("client-message-sent", (msg) => {
+        const messageItem = {message:msg,id:1, user:{id:+new Date(),name:'Dimych'}}
         console.log("message: " + msg);
-        // socket.emit("chat message", msg);
+        messages.push(messageItem)
+        socket.emit("new-message-sent", messageItem);
     });
+
+    connection.emit("init-messages-published",messages )
+
     console.log('a user connected',connection.id);
 });
 
