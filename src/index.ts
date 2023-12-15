@@ -8,7 +8,8 @@ const port =process.env.PORT|| 5000
 const server = http.createServer(app)
 const socket = new Server(server,{cors: {
         origin: "https://chatwebsocket-front.vercel.app",
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST"],
+        credentials: true
     }})
 
 
