@@ -9,6 +9,7 @@ const server = http.createServer(app)
 const socket = new Server(server,{cors: {
         origin: '*',
         methods: ["GET", "POST"],
+        allowedHeaders: ['Content-Type']
 
     }})
 
