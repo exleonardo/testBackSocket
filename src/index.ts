@@ -16,7 +16,12 @@ const socket = new Server(server,{cors: {
 
 const messages =[{message:'Hello Bomj',id:1, user:{id:1,name:'Dimych'}},{message:'Hello Psina',id:1, user:{id:1,name:'Victor'}}]
 
-app.use(cors())
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    next();
+})
 app.options('*', cors())
 
 
