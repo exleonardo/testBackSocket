@@ -15,7 +15,7 @@ const socket = new Server(server,{cors: {
 
 const messages =[{message:'Hello Bomj',id:1, user:{id:1,name:'Dimych'}},{message:'Hello Psina',id:3, user:{id:3,name:'Victor'}}]
 
-app.use(cors())
+app.use(cors({origin:"*"}))
 app.options('*', cors())
 
 
