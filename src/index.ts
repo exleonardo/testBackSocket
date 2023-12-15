@@ -7,7 +7,7 @@ const app = express()
 const port =process.env.PORT|| 5000
 const server = http.createServer(app)
 const socket = new Server(server,{cors: {
-        origin: "https://chatwebsocket-front.vercel.app/",
+        origin: "https://chatwebsocket-front.vercel.app",
         methods: ["GET", "POST"]
     }})
 
