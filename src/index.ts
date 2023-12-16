@@ -10,6 +10,7 @@ const socket = new Server(server,{cors: {
         origin: ['https://chatwebsocket-front.vercel.app'],
         methods: ["GET", "POST"],
         allowedHeaders: ['*'],
+        credentials:true
     },allowEIO3:true,
 
     transports:['websocket', 'polling']
