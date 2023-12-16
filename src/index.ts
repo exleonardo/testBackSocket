@@ -9,8 +9,11 @@ const server = http.createServer(app)
 const socket = new Server(server,{cors: {
         origin: ['https://chatwebsocket-front.vercel.app'],
         methods: ["GET", "POST"],
+
         allowedHeaders: ['*'],
-    }})
+    },allowEIO3:true,
+    transports:['websocket', 'polling']
+})
 
 
 const messages =[{message:'Hello Bomj',id:1, user:{id:1,name:'Dimych'}},{message:'Hello Psina',id:3, user:{id:3,name:'Victor'}}]
