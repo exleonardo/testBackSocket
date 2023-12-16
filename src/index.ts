@@ -9,9 +9,9 @@ const server = http.createServer(app)
 const socket = new Server(server,{cors: {
         origin: ['https://chatwebsocket-front.vercel.app'],
         methods: ["GET", "POST"],
-
         allowedHeaders: ['*'],
     },allowEIO3:true,
+
     transports:['websocket', 'polling']
 })
 
@@ -103,7 +103,9 @@ app.post('/prod', (req:Request, res:Response) => {
 app.get('/address', (req:Request, res:Response) => {
     res.send(address)
 })
-
+app.get('/messages',(req:Request, res:Response)=>{
+    res.send(messages)
+})
 server.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
